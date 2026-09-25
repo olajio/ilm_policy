@@ -1,0 +1,506 @@
+MIME-Version: 1.0
+Content-Type: multipart/related; type="text/html"; boundary="----=_Part_MHTMLBoundary_001"
+Subject: ILM Policy - Data Tier Transitions & Retention
+Date: Fri, 25 Sep 2026 15:39:21 -0000
+X-MimeOLE: Produced by Claude
+
+------=_Part_MHTMLBoundary_001
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: ilm_policy_table.html
+
+<!DOCTYPE html>
+<html lang=3D"en">
+<head>
+<meta charset=3D"UTF-8">
+<meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D1.=
+0">
+<title>ILM Policy =E2=80=94 Data Tier Transitions & Retention</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial,=
+ sans-serif; font-size: 11px; color: #1a1a1a; background: #fff; padding: 20=
+px; }
+  h1 { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 14=
+px; }
+
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  col.c-group   { width: 11%; }
+  col.c-policy  { width: 13%; }
+  col.c-patterns{ width: 16%; }
+  col.c-hot     { width: 11%; }
+  col.c-warm    { width: 11%; }
+  col.c-frozen  { width: 11%; }
+  col.c-delete  { width: 8%;  }
+  col.c-total   { width: 9%;  }
+
+  thead th {
+    background: #f0f0f0;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #555;
+    padding: 6px 7px;
+    text-align: left;
+    border-bottom: 2px solid #ccc;
+    border-right: 1px solid #ddd;
+  }
+  thead th:last-child { border-right: none; }
+
+  tbody td {
+    padding: 7px 7px;
+    border-bottom: 1px solid #e8e8e8;
+    border-right: 1px solid #eeeeee;
+    vertical-align: top;
+    line-height: 1.45;
+  }
+  tbody td:last-child { border-right: none; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* alternating rows */
+  tbody tr:nth-child(even) td { background: #fafafa; }
+  tbody tr:nth-child(odd)  td { background: #ffffff; }
+
+  /* warning row */
+  tr.warn td { background: #fffbea !important; }
+  tr.indef td { background: #fff5f0 !important; }
+
+  .group-name { font-weight: 700; font-size: 11px; display: block; margin-b=
+ottom: 2px; }
+  .group-sub  { font-size: 9px; color: #777; }
+
+  .policy-name { font-family: "SF Mono","Courier New",monospace; font-size:=
+ 9.5px; color: #1a4a8a; display: block; word-break: break-all; margin-botto=
+m: 2px; }
+  .policy-ver  { font-size: 9px; color: #888; }
+
+  .pattern { display: block; font-family: "SF Mono","Courier New",monospace=
+; font-size: 9px; color: #333; background: #f0f4fa; border: 1px solid #d0dd=
+f0; border-radius: 2px; padding: 1px 4px; margin-bottom: 2px; white-space: =
+nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* tier pills */
+  .pill {
+    display: inline-block;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    margin-bottom: 3px;
+  }
+  .pill-hot    { background: #d4edda; color: #155724; }
+  .pill-warm   { background: #cce5ff; color: #004085; }
+  .pill-frozen { background: #e2d9f3; color: #4a235a; }
+  .pill-delete { background: #f8d7da; color: #721c24; }
+  .pill-dash   { background: #eeeeee; color: #999; }
+  .pill-warn   { background: #fff3cd; color: #856404; border: 1px solid #ff=
+c107; }
+  .pill-hour   { background: #d1ecf1; color: #0c5460; }
+
+  .tier-detail { font-size: 9.5px; color: #444; line-height: 1.5; display: =
+block; margin-top: 1px; }
+  .tier-arrow  { color: #888; }
+
+  .total-days  { font-size: 13px; font-weight: 700; color: #1a1a1a; display=
+: block; }
+  .total-sub   { font-size: 9px; color: #666; }
+
+  .warn-label  { font-size: 9px; color: #856404; font-weight: 600; }
+  .indef-label { font-size: 13px; font-weight: 700; color: #a02020; }
+  .indef-sub   { font-size: 9px; color: #a02020; }
+
+  .note { margin-top: 16px; border-left: 3px solid #2E5496; background: #f0=
+f4fb; padding: 10px 14px; border-radius: 0 4px 4px 0; font-size: 10.5px; li=
+ne-height: 1.7; color: #333; }
+  .note p { margin: 2px 0; }
+  code { font-family: "SF Mono","Courier New",monospace; font-size: 9.5px; =
+background: #e8edf5; padding: 1px 3px; border-radius: 2px; }
+</style>
+</head>
+<body>
+<h1>ILM policy =E2=80=94 data tier transitions &amp; retention</h1>
+
+<table>
+  <colgroup>
+    <col class=3D"c-group"><col class=3D"c-policy"><col class=3D"c-patterns=
+">
+    <col class=3D"c-hot"><col class=3D"c-warm"><col class=3D"c-frozen"><col=
+ class=3D"c-delete"><col class=3D"c-total">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Group</th>
+      <th>Active Policy</th>
+      <th>Active Index Patterns</th>
+      <th>Hot</th>
+      <th>Warm</th>
+      <th>Frozen</th>
+      <th>Delete</th>
+      <th>Total Retenti&shy;on</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- METRICS -->
+    <tr>
+      <td>
+        <span class=3D"group-name">Metrics</span>
+        <span class=3D"group-sub">metrics-* data streams</span>
+      </td>
+      <td>
+        <span class=3D"policy-name">metrics</span>
+        <span class=3D"policy-ver">v16 =C2=B7 2026-07-14</span>
+      </td>
+      <td>
+        <span class=3D"pattern">metrics-system.*</span>
+        <span class=3D"pattern">metrics-elasticsearch.*</span>
+        <span class=3D"pattern">metrics-logstash.*</span>
+        <span class=3D"pattern">metrics-elastic_agent.*</span>
+        <span class=3D"pattern">metrics-fleet_server.*</span>
+        <span class=3D"pattern">metrics-kubernetes.*</span>
+        <span class=3D"pattern">metrics-windows.*</span>
+        <span class=3D"pattern">metrics-elk-{nprd,prod}</span>
+        <span class=3D"pattern">metrics-class-nprd</span>
+        <span class=3D"pattern">metrics-openshift-*</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-hot">5d</span>
+        <span class=3D"tier-detail">rollover at 5d / 1.8B docs / 30GB</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-warm">0d</span>
+        <span class=3D"tier-detail">immediate forcemerge snapshot<br>shrink=
+ <span class=3D"tier-arrow">=E2=86=92</span> 1 seg, shrink <span class=3D"t=
+ier-arrow">=E2=86=92</span> 1 shard</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-frozen">2d</span>
+        <span class=3D"tier-detail">searchable snapshot <span class=3D"tier=
+-arrow">=E2=86=92</span> pure</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-delete">10d</span>
+      </td>
+      <td>
+        <span class=3D"total-days">10</span>
+        <span class=3D"total-sub">days</span>
+      </td>
+    </tr>
+
+    <!-- METRICS APM -->
+    <tr>
+      <td>
+        <span class=3D"group-name">Metrics (APM)</span>
+        <span class=3D"group-sub">metrics-apm.app.* data streams</span>
+      </td>
+      <td>
+        <span class=3D"policy-name">metrics-apm.app_metrics-default_policy<=
+/span>
+        <span class=3D"policy-ver">v10 =C2=B7 2026-07-14</span>
+      </td>
+      <td>
+        <span class=3D"pattern">metrics-apm.app.*-default</span>
+        <span class=3D"pattern">metrics-apm.service_*</span>
+        <span class=3D"pattern">metrics-apm.transaction.*</span>
+        <span class=3D"pattern">metrics-apm.internal-default</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-hot">5d</span>
+        <span class=3D"tier-detail">rollover at 5d / 1.8B docs / 30GB</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-warm">0d</span>
+        <span class=3D"tier-detail">forcemerge snapshot<br>shrink <span cla=
+ss=3D"tier-arrow">=E2=86=92</span> 1 shard</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-frozen">2d</span>
+        <span class=3D"tier-detail">searchable snapshot <span class=3D"tier=
+-arrow">=E2=86=92</span> pure</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-delete">10d</span>
+      </td>
+      <td>
+        <span class=3D"total-days">10</span>
+        <span class=3D"total-sub">days</span>
+      </td>
+    </tr>
+
+    <!-- LOGS -->
+    <tr>
+      <td>
+        <span class=3D"group-name">Logs</span>
+        <span class=3D"group-sub">logs-* data streams</span>
+      </td>
+      <td>
+        <span class=3D"policy-name">logs</span>
+        <span class=3D"policy-ver">v12 =C2=B7 2026-07-14</span>
+      </td>
+      <td>
+        <span class=3D"pattern">logs-elastic_agent.*</span>
+        <span class=3D"pattern">logs-system.*</span>
+        <span class=3D"pattern">logs-elasticsearch.*</span>
+        <span class=3D"pattern">logs-logstash.*</span>
+        <span class=3D"pattern">logs-elk-{nprd,prod}</span>
+        <span class=3D"pattern">logs-class-{nprd,prod}</span>
+        <span class=3D"pattern">logs-crowdstrike.*</span>
+        <span class=3D"pattern">logs-sec-*</span>
+        <span class=3D"pattern">logs-openshift-*</span>
+        <span class=3D"pattern">logs-default-{nprd,prod}</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-hot">5d</span>
+        <span class=3D"tier-detail">rollover at 5d / 1.8B docs / 30GB</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-warm">0d</span>
+        <span class=3D"tier-detail">immediate forcemerge<br>shrink <span cl=
+ass=3D"tier-arrow">=E2=86=92</span> 1 shard</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-frozen">2d</span>
+        <span class=3D"tier-detail">searchable snapshot <span class=3D"tier=
+-arrow">=E2=86=92</span> pure</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-delete">10d</span>
+      </td>
+      <td>
+        <span class=3D"total-days">10</span>
+        <span class=3D"total-sub">days</span>
+      </td>
+    </tr>
+
+    <!-- LOGS APM -->
+    <tr>
+      <td>
+        <span class=3D"group-name">Logs (APM app)</span>
+        <span class=3D"group-sub">logs-apm.app.* data streams</span>
+      </td>
+      <td>
+        <span class=3D"policy-name">logs-apm.app_logs-default_policy</span>
+        <span class=3D"policy-ver">v4 =C2=B7 2026-07-14</span>
+      </td>
+      <td>
+        <span class=3D"pattern">logs-apm.app.*-default</span>
+        <span class=3D"pattern">logs-apm.error-default</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-hot">5d</span>
+        <span class=3D"tier-detail">rollover at 5d / 1.8B docs / 30GB</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-warm">0d</span>
+        <span class=3D"tier-detail">immediate forcemerge<br>shrink <span cl=
+ass=3D"tier-arrow">=E2=86=92</span> 1 shard</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-frozen">2d</span>
+        <span class=3D"tier-detail">searchable snapshot <span class=3D"tier=
+-arrow">=E2=86=92</span> pure</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-delete">10d</span>
+      </td>
+      <td>
+        <span class=3D"total-days">10</span>
+        <span class=3D"total-sub">days</span>
+      </td>
+    </tr>
+
+    <!-- TRACES -->
+    <tr class=3D"warn">
+      <td>
+        <span class=3D"group-name">Traces</span>
+        <span class=3D"group-sub">traces-apm-default</span>
+      </td>
+      <td>
+        <span class=3D"policy-name">custom-traces-apm-45d-policy</span>
+        <span class=3D"policy-ver">v3 =C2=B7 2026-07-14</span>
+      </td>
+      <td>
+        <span class=3D"pattern">traces-apm-default</span>
+        <span class=3D"pattern">traces-apm.rum-default</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-hot">5d</span>
+        <span class=3D"tier-detail">rollover at 5d / 1.8B docs / 50GB</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-warn">=E2=9A=A0 0d</span>
+        <span class=3D"tier-detail warn-label">no actions defined</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-frozen">2d</span>
+        <span class=3D"tier-detail">searchable snapshot <span class=3D"tier=
+-arrow">=E2=86=92</span> pure</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-delete">10d</span>
+      </td>
+      <td>
+        <span class=3D"total-days">10</span>
+        <span class=3D"total-sub">days</span>
+      </td>
+    </tr>
+
+    <!-- TRACES SAMPLED -->
+    <tr>
+      <td>
+        <span class=3D"group-name">Traces (sampled)</span>
+        <span class=3D"group-sub">traces-apm.sampled-default</span>
+      </td>
+      <td>
+        <span class=3D"policy-name">traces-apm.sampled_traces-default_polic=
+y</span>
+        <span class=3D"policy-ver">v5 =C2=B7 2024-07-08</span>
+      </td>
+      <td>
+        <span class=3D"pattern">traces-apm.sampled-default</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-hour">1h</span>
+        <span class=3D"tier-detail">rollover at 1h<br>(unsampled buffer)</s=
+pan>
+      </td>
+      <td><span class=3D"pill pill-dash">=E2=80=94</span></td>
+      <td><span class=3D"pill pill-dash">=E2=80=94</span></td>
+      <td>
+        <span class=3D"pill pill-hour">1h</span>
+      </td>
+      <td>
+        <span class=3D"total-days">~1</span>
+        <span class=3D"total-sub">hour</span>
+      </td>
+    </tr>
+
+    <!-- SYNTHETICS CUSTOM -->
+    <tr>
+      <td>
+        <span class=3D"group-name">Synthetics (custom)</span>
+        <span class=3D"group-sub">synthetics-* custom streams</span>
+      </td>
+      <td>
+        <span class=3D"policy-name">synthetics</span>
+        <span class=3D"policy-ver">v8 =C2=B7 2026-07-14</span>
+      </td>
+      <td>
+        <span class=3D"pattern">synthetics-default-prod</span>
+        <span class=3D"pattern">synthetics-mulesoft-prod</span>
+        <span class=3D"pattern">synthetics-openshift-nprd</span>
+        <span class=3D"pattern">synthetics-openshift-muletest-nprd</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-hot">5d</span>
+        <span class=3D"tier-detail">rollover at 5d / 1.8B docs / 30GB</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-warm">0d</span>
+        <span class=3D"tier-detail">immediate forcemerge, readonly, shrink =
+<span class=3D"tier-arrow">=E2=86=92</span> 1 shard</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-frozen">2d</span>
+        <span class=3D"tier-detail">searchable snapshot <span class=3D"tier=
+-arrow">=E2=86=92</span> pure</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-delete">10d</span>
+      </td>
+      <td>
+        <span class=3D"total-days">10</span>
+        <span class=3D"total-sub">days</span>
+      </td>
+    </tr>
+
+    <!-- SYNTHETICS FLEET -->
+    <tr>
+      <td>
+        <span class=3D"group-name">Synthetics (fleet-managed)</span>
+        <span class=3D"group-sub">synthetics-browser/http/tcp/icmp template=
+s</span>
+      </td>
+      <td>
+        <span class=3D"policy-name">custom-synthetics-pure-14d-policy</span>
+        <span class=3D"policy-ver">v1 =C2=B7 2026-05-19</span>
+      </td>
+      <td>
+        <span class=3D"pattern">synthetics-browser.*</span>
+        <span class=3D"pattern">synthetics-http</span>
+        <span class=3D"pattern">synthetics-tcp</span>
+        <span class=3D"pattern">synthetics-icmp</span>
+        <span class=3D"pattern">synthetics-browser.network</span>
+        <span class=3D"pattern">synthetics-browser.screenshot</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-hot">7d</span>
+        <span class=3D"tier-detail">rollover at 7d / 50GB =E2=80=94 no snap=
+shot</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-warm">7d</span>
+        <span class=3D"tier-detail">no actions defined</span>
+      </td>
+      <td><span class=3D"pill pill-dash">=E2=80=94</span></td>
+      <td>
+        <span class=3D"pill pill-delete">14d</span>
+      </td>
+      <td>
+        <span class=3D"total-days">14</span>
+        <span class=3D"total-sub">days</span>
+      </td>
+    </tr>
+
+    <!-- UPTIME / ALERTS -->
+    <tr class=3D"indef">
+      <td>
+        <span class=3D"group-name">Uptime / Alerts</span>
+        <span class=3D"group-sub">.internal.alerts-observability.uptime.*</=
+span>
+      </td>
+      <td>
+        <span class=3D"policy-name">.alerts-ilm-policy</span>
+        <span class=3D"policy-ver">v500 =C2=B7 2026-09-21</span>
+      </td>
+      <td>
+        <span class=3D"pattern">.internal.alerts-observability.uptime.alert=
+s-default-*</span>
+        <span class=3D"pattern">.internal.alerts-observability.uptime.alert=
+s-enterprise-services-*</span>
+        <span class=3D"pattern">.internal.alerts-observability.uptime.alert=
+s-application-systems-*</span>
+      </td>
+      <td>
+        <span class=3D"pill pill-hot">30d</span>
+        <span class=3D"tier-detail">rollover at 30d / 50GB</span>
+      </td>
+      <td><span class=3D"pill pill-dash">=E2=80=94</span></td>
+      <td><span class=3D"pill pill-dash">=E2=80=94</span></td>
+      <td><span class=3D"pill pill-dash">=E2=80=94</span></td>
+      <td>
+        <span class=3D"indef-label">Indefinit&shy;e</span>
+        <span class=3D"indef-sub">(hot only,<br>no delete)</span>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<div class=3D"note">
+  <p>=E2=9A=A0=EF=B8=8F &nbsp;<strong>Traces warm phase</strong> has no act=
+ions defined =E2=80=94 forcemerge/shrink is skipped before freezing. Confir=
+m this is intentional before promoting to prod.</p>
+  <p>=E2=9D=8C &nbsp;<strong>Uptime/Alerts</strong> has no delete phase =E2=
+=80=94 indices grow indefinitely. A delete phase should be added.</p>
+  <p>=F0=9F=93=8C &nbsp;All frozen snapshots target the <code>pure</code> r=
+epository. &nbsp;|&nbsp; =F0=9F=94=81 Traces (sampled) is an intentional 1-=
+hour buffer for tail-based sampling =E2=80=94 not a concern.</p>
+</div>
+
+</body>
+</html>
+
+
+------=_Part_MHTMLBoundary_001--
