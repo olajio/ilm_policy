@@ -1,0 +1,213 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);font-size:13px;color:var(--text-primary)}
+.wrap{padding:1rem 0}
+h2{font-size:16px;font-weight:500;margin-bottom:1rem;color:var(--text-primary)}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);padding:6px 10px;border-bottom:0.5px solid var(--border-strong);text-align:left;background:var(--surface-1)}
+td{padding:8px 10px;border-bottom:0.5px solid var(--border);vertical-align:top;line-height:1.5}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--surface-1)}
+.group{font-weight:500;font-size:13px;color:var(--text-primary)}
+.policy{font-size:11px;color:var(--text-secondary);margin-top:2px;font-family:var(--font-mono)}
+.streams{font-size:11px;color:var(--text-secondary);margin-top:3px}
+.pill{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500;margin:1px 0}
+.hot{background:#faeeda;color:#854f0b}
+.warm{background:#e6f1fb;color:#185fa5}
+.cold{background:#eeedfe;color:#533ab7}
+.frozen{background:#e1f5ee;color:#0f6e56}
+.delete{background:#fcebeb;color:#a32d2d}
+.none{background:var(--surface-1);color:var(--text-muted);border:0.5px solid var(--border)}
+.tier-row{display:flex;flex-direction:column;gap:4px}
+.tier-entry{display:flex;align-items:baseline;gap:6px}
+.age{font-size:11px;color:var(--text-muted);min-width:44px}
+.action{font-size:12px;color:var(--text-secondary)}
+.col-group{width:18%}
+.col-policy{width:20%}
+.col-indices{width:22%}
+.col-hot{width:9%}
+.col-warm{width:9%}
+.col-frozen{width:9%}
+.col-delete{width:9%}
+.col-total{width:9%}
+.tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:10px;margin:1px 2px 1px 0;background:var(--surface-0,var(--surface-1));border:0.5px solid var(--border);color:var(--text-secondary)}
+.note{font-size:11px;color:var(--text-muted);margin-top:14px;padding-top:10px;border-top:0.5px solid var(--border)}
+</style>
+<div class="wrap">
+<h2>ILM policy — data tier transitions &amp; retention</h2>
+<table>
+<colgroup>
+  <col class="col-group"><col class="col-policy"><col class="col-indices">
+  <col class="col-hot"><col class="col-warm"><col class="col-frozen"><col class="col-delete"><col class="col-total">
+</colgroup>
+<thead>
+<tr>
+  <th>Group</th>
+  <th>Active policy</th>
+  <th>Active index patterns</th>
+  <th>Hot</th>
+  <th>Warm</th>
+  <th>Frozen</th>
+  <th>Delete</th>
+  <th>Total retention</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td><span class="group">Metrics</span><div class="streams">metrics-* data streams</div></td>
+<td><span class="policy">metrics</span><div class="streams">v16 · 2026-07-14</div></td>
+<td>
+  <span class="tag">metrics-system.*</span>
+  <span class="tag">metrics-elasticsearch.*</span>
+  <span class="tag">metrics-logstash.*</span>
+  <span class="tag">metrics-elastic_agent.*</span>
+  <span class="tag">metrics-fleet_server.*</span>
+  <span class="tag">metrics-kubernetes.*</span>
+  <span class="tag">metrics-windows.*</span>
+  <span class="tag">metrics-elk-{nprd,prod}</span>
+  <span class="tag">metrics-class-nprd</span>
+  <span class="tag">metrics-openshift-*</span>
+</td>
+<td><span class="pill hot">5d</span><div class="action">rollover at 5d / 1.8B docs / 30GB</div></td>
+<td><span class="pill warm">0d</span><div class="action">immediate forcemerge → 1 seg, shrink → 1 shard</div></td>
+<td><span class="pill frozen">2d</span><div class="action">searchable snapshot → pure</div></td>
+<td><span class="pill delete">10d</span></td>
+<td><strong>10 days</strong></td>
+</tr>
+
+<tr>
+<td><span class="group">Metrics (APM)</span><div class="streams">metrics-apm.app.* data streams</div></td>
+<td><span class="policy">metrics-apm.app_metrics-default_policy</span><div class="streams">v10 · 2026-07-14</div></td>
+<td>
+  <span class="tag">metrics-apm.app.*-default</span>
+  <span class="tag">metrics-apm.service_*</span>
+  <span class="tag">metrics-apm.transaction.*</span>
+  <span class="tag">metrics-apm.internal-default</span>
+</td>
+<td><span class="pill hot">5d</span><div class="action">rollover at 5d / 1.8B docs / 30GB</div></td>
+<td><span class="pill warm">0d</span><div class="action">immediate forcemerge, shrink → 1 shard</div></td>
+<td><span class="pill frozen">2d</span><div class="action">searchable snapshot → pure</div></td>
+<td><span class="pill delete">10d</span></td>
+<td><strong>10 days</strong></td>
+</tr>
+
+<tr>
+<td><span class="group">Logs</span><div class="streams">logs-* data streams</div></td>
+<td><span class="policy">logs</span><div class="streams">v12 · 2026-07-14</div></td>
+<td>
+  <span class="tag">logs-elastic_agent.*</span>
+  <span class="tag">logs-system.*</span>
+  <span class="tag">logs-elasticsearch.*</span>
+  <span class="tag">logs-logstash.*</span>
+  <span class="tag">logs-elk-{nprd,prod}</span>
+  <span class="tag">logs-class-{nprd,prod}</span>
+  <span class="tag">logs-crowdstrike.*</span>
+  <span class="tag">logs-sec-*</span>
+  <span class="tag">logs-openshift-*</span>
+  <span class="tag">logs-default-{nprd,prod}</span>
+</td>
+<td><span class="pill hot">5d</span><div class="action">rollover at 5d / 1.8B docs / 30GB</div></td>
+<td><span class="pill warm">0d</span><div class="action">immediate forcemerge, shrink → 1 shard</div></td>
+<td><span class="pill frozen">2d</span><div class="action">searchable snapshot → pure</div></td>
+<td><span class="pill delete">10d</span></td>
+<td><strong>10 days</strong></td>
+</tr>
+
+<tr>
+<td><span class="group">Logs (APM app)</span><div class="streams">logs-apm.app.* data streams</div></td>
+<td><span class="policy">logs-apm.app_logs-default_policy</span><div class="streams">v4 · 2026-07-14</div></td>
+<td>
+  <span class="tag">logs-apm.app.*-default</span>
+  <span class="tag">logs-apm.error-default</span>
+</td>
+<td><span class="pill hot">5d</span><div class="action">rollover at 5d / 1.8B docs / 30GB</div></td>
+<td><span class="pill warm">0d</span><div class="action">immediate forcemerge, shrink → 1 shard</div></td>
+<td><span class="pill frozen">2d</span><div class="action">searchable snapshot → pure</div></td>
+<td><span class="pill delete">10d</span></td>
+<td><strong>10 days</strong></td>
+</tr>
+
+<tr>
+<td><span class="group">Traces</span><div class="streams">traces-apm-default</div></td>
+<td><span class="policy">custom-traces-apm-45d-policy</span><div class="streams">v3 · 2026-07-14</div></td>
+<td>
+  <span class="tag">traces-apm-default</span>
+  <span class="tag">traces-apm.rum-default</span>
+</td>
+<td><span class="pill hot">5d</span><div class="action">rollover at 5d / 1.8B docs / 50GB</div></td>
+<td><span class="pill warm">0d</span><div class="action">no actions defined</div></td>
+<td><span class="pill frozen">2d</span><div class="action">searchable snapshot → pure</div></td>
+<td><span class="pill delete">10d</span></td>
+<td><strong>10 days</strong></td>
+</tr>
+
+<tr>
+<td><span class="group">Traces (sampled)</span><div class="streams">traces-apm.sampled-default</div></td>
+<td><span class="policy">traces-apm.sampled_traces-default_policy</span><div class="streams">v5 · 2024-07-08</div></td>
+<td>
+  <span class="tag">traces-apm.sampled-default</span>
+</td>
+<td><span class="pill hot">1h</span><div class="action">rollover at 1h (unsampled buffer)</div></td>
+<td><span class="pill none">—</span></td>
+<td><span class="pill none">—</span></td>
+<td><span class="pill delete">1h</span></td>
+<td><strong>~1 hour</strong></td>
+</tr>
+
+<tr>
+<td><span class="group">Synthetics</span><div class="streams">synthetics-* custom streams</div></td>
+<td><span class="policy">synthetics</span><div class="streams">v8 · 2026-07-14</div></td>
+<td>
+  <span class="tag">synthetics-default-prod</span>
+  <span class="tag">synthetics-mulesoft-prod</span>
+  <span class="tag">synthetics-openshift-nprd</span>
+  <span class="tag">synthetics-openshift-muletest-nprd</span>
+</td>
+<td><span class="pill hot">5d</span><div class="action">rollover at 5d / 1.8B docs / 30GB</div></td>
+<td><span class="pill warm">0d</span><div class="action">immediate forcemerge, readonly, shrink → 1 shard</div></td>
+<td><span class="pill frozen">2d</span><div class="action">searchable snapshot → pure</div></td>
+<td><span class="pill delete">10d</span></td>
+<td><strong>10 days</strong></td>
+</tr>
+
+<tr>
+<td><span class="group">Synthetics (fleet-managed)</span><div class="streams">synthetics-browser/http/tcp/icmp templates</div></td>
+<td><span class="policy">custom-synthetics-pure-14d-policy</span><div class="streams">v1 · 2026-05-19</div></td>
+<td>
+  <span class="tag">synthetics-browser.*</span>
+  <span class="tag">synthetics-http</span>
+  <span class="tag">synthetics-tcp</span>
+  <span class="tag">synthetics-icmp</span>
+  <span class="tag">synthetics-browser.network</span>
+  <span class="tag">synthetics-browser.screenshot</span>
+</td>
+<td><span class="pill hot">7d</span><div class="action">rollover at 7d / 50GB — no snapshot</div></td>
+<td><span class="pill warm">7d</span><div class="action">no actions defined</div></td>
+<td><span class="pill none">—</span></td>
+<td><span class="pill delete">14d</span></td>
+<td><strong>14 days</strong></td>
+</tr>
+
+<tr>
+<td><span class="group">Uptime / alerts</span><div class="streams">.internal.alerts-observability.uptime.*</div></td>
+<td><span class="policy">.alerts-ilm-policy</span><div class="streams">v500 · 2026-09-21</div></td>
+<td>
+  <span class="tag">.internal.alerts-observability.uptime.alerts-default-*</span>
+  <span class="tag">.internal.alerts-observability.uptime.alerts-enterprise-services-*</span>
+  <span class="tag">.internal.alerts-observability.uptime.alerts-application-systems-*</span>
+</td>
+<td><span class="pill hot">30d</span><div class="action">rollover at 30d / 50GB</div></td>
+<td><span class="pill none">—</span></td>
+<td><span class="pill none">—</span></td>
+<td><span class="pill none">—</span></td>
+<td><strong>Indefinite</strong> (hot only, no delete)</td>
+</tr>
+
+</tbody>
+</table>
+
+<div class="note">
+  <strong>Tier key:</strong> Hot = active ingest &amp; search · Warm = read-only, optimised · Frozen = searchable snapshot on Pure Storage · Delete = data removed. All frozen snapshots target the <code>pure</code> repository. Uptime alert state indices have no delete phase — data accumulates until manually managed.
+</div>
+</div>
